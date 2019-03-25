@@ -107,3 +107,35 @@ let createNotificationsComponent = (props) => {
     return notificationsBlock;
 };
 //-------------------------------------------------//
+
+
+
+//-------------------------------------------------//
+//----   Mount NotificationsComponent In DOM   ----//
+//-------------------------------------------------//
+const notificationsTexts_o = [  'aaa',
+    'bbb',
+    'ccccc',
+    'dddddddddddd',
+    'ccccc',
+    'dddddddddddd'];
+
+
+function installNotificationsComponent(notificationsTexts){
+
+    let notificationsComponent = createNotificationsComponent({ notifications:notificationsTexts});
+    let article = document.getElementById('articleId');
+    article.appendChild(notificationsComponent);
+
+    //     document.getElementById('closeBlock').addEventListener('click', onCloseBlockNotificationClicked);
+    // onCloseBlockNotificationClicked();
+    // setTimeout(showNotificationBlock, 5000);
+}
+
+
+
+window.addEventListener('load',
+    ()=>{
+        setTimeout(()=>{installNotificationsComponent(notificationsTexts_o)}, 5000);
+    });
+
