@@ -78,7 +78,10 @@ let createNotificationsComponent = (props) => {
     notificationsBlock.appendChild(notificationsBlock__closeIcon);
 
 
-    
+    notificationsBlock__closeIcon.addEventListener('click',
+        ()=>{
+            notificationsBlock.classList.add("notifications-block--inactive");
+        });
     //------------------------------------------------------------------
 
     let notificationsBlock__notificationsOnOffBlock = document.createElement("div");
