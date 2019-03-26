@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChangeLetters </title>
+</head>
+<body>
+<script>
+    let ChangeLetters = (str) => {
+        let arr = str.split('');
+        let resultStr;
+        const alphabetUperCaseStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const alphabetLowerCaseStr = alphabetUperCaseStr.toLowerCase();
+        const alphabetArr = (alphabetUperCaseStr + alphabetLowerCaseStr).split('');
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < alphabetArr.length; j++) {
+
+                if (arr[i] === alphabetArr[j]) {
+
+                    if (arr[i] === alphabetArr[alphabetArr.length - 1]) {
+                        arr[i] = alphabetArr[0];
+                    } else {
+                        arr[i] = alphabetArr[j + 1];
+                    }
+                    break;
+                }
+            }
+        }
+        resultStr = arr.join('');
+        ChangeLettersVowels(resultStr);
+        return resultStr;
+    };
+
+
+    let ChangeLettersVowels = (str) =>{
+        let arr = str.split('');
+        const vowelsStr = 'AEIOUYaeiouy';
+        let resultStr;
+        const vowelsArr = vowelsStr.split('');
+        for (let i = 0; i < arr.length; i++){
+            for (let j = 0; j < vowelsArr.length; j++){
+                if (arr[i] === vowelsArr[j]) {
+                    arr[i] = arr[i].toUpperCase();
+                }
+            }
+        }
+        resultStr = arr.join('');
+        console.log(resultStr);
+        return resultStr;
+    };
+
+    ChangeLetters('Dog');
+</script>
+</body>
+</html>
