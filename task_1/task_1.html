@@ -1,0 +1,28 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    let FindLongestString = (sen) => {
+        if (sen !== '') {
+            let arr = sen.split(' ');
+            let maxSen = arr[0].length;
+            let maxWord = arr[0];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].length > maxSen) {
+                    maxSen = arr[i].length;
+                    maxWord = arr[i];
+                }
+            }
+            console.log(maxWord);
+            return maxWord;
+        }
+    };
+
+    FindLongestString('ла ллала лалалала ла');
+
+</script>
+</body>
+</html>
