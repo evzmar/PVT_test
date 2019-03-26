@@ -34,6 +34,7 @@
 
     display: flex;
     align-items: stretch;
+    background: aliceblue;
 
 }
 
@@ -130,11 +131,11 @@
 .notifications-block__close-icon{
     grid-row: 1;
     grid-column: 4;
-    justify-self: stretch;
 
+    justify-self: stretch;
     position: absolute;
-    right: 32px;
-    top: 32px;
+    right: 0.5rem;
+    top: 1rem;
     width: 32px;
     height: 32px;
     opacity: 0.3;
