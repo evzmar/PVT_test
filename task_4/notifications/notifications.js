@@ -65,6 +65,7 @@ let createNotificationsComponent = (props) => {
     notificationsBlock.appendChild(notificationsBlock__slidePrevBtn);
 
     notificationsBlock__slidePrevBtn.addEventListener('click', onSlidePrevBtnClicked);
+    notificationsBlock__slidePrevBtn.setAttribute('tabindex', '6');
 
     //------------------------------------------------------------------
 
@@ -74,7 +75,7 @@ let createNotificationsComponent = (props) => {
     notificationsBlock.appendChild(notificationsBlock__slideNextBtn);
 
     notificationsBlock__slideNextBtn.addEventListener('click', onSlideNextBtnClicked);
-
+    notificationsBlock__slideNextBtn.setAttribute('tabindex', '6');
     //------------------------------------------------------------------
 
     let notificationsBlock__closeIcon = document.createElement("div");
@@ -86,6 +87,8 @@ let createNotificationsComponent = (props) => {
         ()=>{
             notificationsBlock.classList.add("notifications-block--inactive");
         });
+    notificationsBlock__closeIcon.setAttribute('tabindex', '6');
+
     //------------------------------------------------------------------
 
     let notificationsBlock__notificationsOnOffBlock = document.createElement("div");
