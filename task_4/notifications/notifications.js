@@ -99,6 +99,8 @@ let createNotificationsComponent = (props) => {
     notificationsOnOffBlock__checkbox.type = "checkbox";
     notificationsBlock__notificationsOnOffBlock.appendChild(notificationsOnOffBlock__checkbox);
 
+    notificationsOnOffBlock__checkbox.addEventListener('click', onNotificationsOnOffBlock__checkboxClicked);
+
     //-----------
 
     let notificationsOnOffBlock__checkboxLabel = document.createElement("span");
@@ -128,35 +130,55 @@ let createNotificationsComponent = (props) => {
     }
 
     function onSlideNextBtnClicked() {
-        let newslideIndex = slideIndex + 1;
-        if (newslideIndex >= notificationsBlock__slidesRefs.length){
-            newslideIndex = 0;
+        let newSlideIndex = slideIndex + 1;
+        if (newSlideIndex >= notificationsBlock__slidesRefs.length){
+            newSlideIndex = 0;
         }
 
-        notificationsBlock__slidesRefs[newslideIndex].classList.remove('notification-block__slide--inactive');
+        notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
         notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
-        notificationsBlock__dotsRefs[newslideIndex].classList.remove('notifications-block__dot--inactive');
+        notificationsBlock__dotsRefs[newSlideIndex].classList.remove('notifications-block__dot--inactive');
         notificationsBlock__dotsRefs[slideIndex].classList.add('notifications-block__dot--inactive');
-        slideIndex = newslideIndex;
+        slideIndex = newSlideIndex;
     }
 
     function onSlidePrevBtnClicked() {
-        let newslideIndex = slideIndex - 1;
-        if (newslideIndex < 0){
-            newslideIndex = notificationsBlock__slidesRefs.length-1;
+        let newSlideIndex = slideIndex - 1;
+        if (newSlideIndex < 0){
+            newSlideIndex = notificationsBlock__slidesRefs.length-1;
         }
-        notificationsBlock__slidesRefs[newslideIndex].classList.remove('notification-block__slide--inactive');
+        notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
         notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
-        notificationsBlock__dotsRefs[newslideIndex].classList.remove('notifications-block__dot--inactive');
+        notificationsBlock__dotsRefs[newSlideIndex].classList.remove('notifications-block__dot--inactive');
         notificationsBlock__dotsRefs[slideIndex].classList.add('notifications-block__dot--inactive');
-        slideIndex = newslideIndex;
+        slideIndex = newSlideIndex;
     }
 
 
     resetSlideShow();
 
+//----------------------//
+//---- localStorage ----//
+//----------------------//
+    function onNotificationsOnOffBlock__checkboxClicked() {
+        if (notificationsOnOffBlock__checkbox.checked) {
+            localStorage.setItem('notificationCheckbox', 'true');
+        }else {
+            localStorage.setItem('notificationCheckbox', 'false');
+        }
+    }
 
     //-----------
+    let notificationsOnOffBlock__checkboxValue = localStorage.getItem('notificationCheckbox');
+
+    if(notificationsOnOffBlock__checkboxValue === 'true'){
+        notificationsBlock.classList.add('notifications-block--inactive');
+    } else {
+        notificationsBlock.classList.remove('notifications-block--inactive');
+    }
+
+    //-----------
+
     return notificationsBlock;
 };
 //-------------------------------------------------//
@@ -179,10 +201,6 @@ function installNotificationsComponent(notificationsTexts){
     let notificationsComponent = createNotificationsComponent({ notifications:notificationsTexts});
     let article = document.getElementById('articleId');
     article.appendChild(notificationsComponent);
-
-    //     document.getElementById('closeBlock').addEventListener('click', onCloseBlockNotificationClicked);
-    // onCloseBlockNotificationClicked();
-    // setTimeout(showNotificationBlock, 5000);
 }
 
 
