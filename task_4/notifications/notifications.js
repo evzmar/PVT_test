@@ -64,12 +64,35 @@ let createNotificationsComponent = (props) => {
     notificationsBlock__slidePrevBtn.innerHTML = '&#10094;';
     notificationsBlock.appendChild(notificationsBlock__slidePrevBtn);
 
+    notificationsBlock__slidePrevBtn.addEventListener('click',
+        () => {
+            let newSlideIndex = slideIndex - 1;
+            if (newSlideIndex < 0){
+                newSlideIndex = notificationsBlock__slidesRefs.length-1;
+            }
+            notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
+            notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
+            slideIndex = newSlideIndex;
+        });
+
     //------------------------------------------------------------------
 
     let notificationsBlock__slideNextBtn = document.createElement("div");
     notificationsBlock__slideNextBtn.className = "notifications-block__slide-next-btn notifications-block__slide-next-btn--positioned";
     notificationsBlock__slideNextBtn.innerHTML = '&#10095;';
     notificationsBlock.appendChild(notificationsBlock__slideNextBtn);
+
+    notificationsBlock__slideNextBtn.addEventListener('click',
+        () => {
+            let newSlideIndex = slideIndex + 1;
+            if (newSlideIndex >= notificationsBlock__slidesRefs.length){
+                newSlideIndex = 0;
+            }
+
+            notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
+            notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
+            slideIndex = newSlideIndex;
+        });
 
     //------------------------------------------------------------------
 
@@ -104,6 +127,21 @@ let createNotificationsComponent = (props) => {
 
     //------------------------------------------------------------------
 
+    //---- slidesShow ------
+
+    let slideIndex = 0;
+
+    function resetSlideShow (){
+
+        for(let i = 0; i < notificationsBlock__slidesRefs.length; ++i){
+            notificationsBlock__slidesRefs[i].classList.add('notification-block__slide--inactive');
+        }
+        notificationsBlock__slidesRefs[slideIndex].classList.remove('notification-block__slide--inactive');
+    }
+    resetSlideShow();
+
+    //-----------
+
     return notificationsBlock;
 };
 //-------------------------------------------------//
@@ -114,11 +152,11 @@ let createNotificationsComponent = (props) => {
 //----   Mount NotificationsComponent In DOM   ----//
 //-------------------------------------------------//
 const notificationsTexts_o = [  'aaa',
-    'bbb',
-    'ccccc',
-    'dddddddddddd',
-    'ccccc',
-    'dddddddddddd'];
+                                'bbb',
+                                'ccccc',
+                                'dddddddddddd',
+                                'ccccc',
+                                'dddddddddddd'];
 
 
 function installNotificationsComponent(notificationsTexts){
