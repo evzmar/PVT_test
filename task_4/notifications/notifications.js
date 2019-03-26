@@ -64,16 +64,7 @@ let createNotificationsComponent = (props) => {
     notificationsBlock__slidePrevBtn.innerHTML = '&#10094;';
     notificationsBlock.appendChild(notificationsBlock__slidePrevBtn);
 
-    notificationsBlock__slidePrevBtn.addEventListener('click',
-        () => {
-            let newSlideIndex = slideIndex - 1;
-            if (newSlideIndex < 0){
-                newSlideIndex = notificationsBlock__slidesRefs.length-1;
-            }
-            notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
-            notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
-            slideIndex = newSlideIndex;
-        });
+    notificationsBlock__slidePrevBtn.addEventListener('click', onSlidePrevBtnClicked);
 
     //------------------------------------------------------------------
 
@@ -82,17 +73,7 @@ let createNotificationsComponent = (props) => {
     notificationsBlock__slideNextBtn.innerHTML = '&#10095;';
     notificationsBlock.appendChild(notificationsBlock__slideNextBtn);
 
-    notificationsBlock__slideNextBtn.addEventListener('click',
-        () => {
-            let newSlideIndex = slideIndex + 1;
-            if (newSlideIndex >= notificationsBlock__slidesRefs.length){
-                newSlideIndex = 0;
-            }
-
-            notificationsBlock__slidesRefs[newSlideIndex].classList.remove('notification-block__slide--inactive');
-            notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
-            slideIndex = newSlideIndex;
-        });
+    notificationsBlock__slideNextBtn.addEventListener('click', onSlideNextBtnClicked);
 
     //------------------------------------------------------------------
 
@@ -127,7 +108,9 @@ let createNotificationsComponent = (props) => {
 
     //------------------------------------------------------------------
 
-    //---- slidesShow ------
+    //----------------------//
+    //---- slidesShow ------//
+    //----------------------//
 
     let slideIndex = 0;
 
@@ -137,11 +120,43 @@ let createNotificationsComponent = (props) => {
             notificationsBlock__slidesRefs[i].classList.add('notification-block__slide--inactive');
         }
         notificationsBlock__slidesRefs[slideIndex].classList.remove('notification-block__slide--inactive');
+
+        for(let i = 0; i < notificationsBlock__dotsRefs.length; ++i) {
+            notificationsBlock__dotsRefs[i].classList.add('notifications-block__dot--inactive');
+        }
+        notificationsBlock__dotsRefs[slideIndex].classList.remove('notifications-block__dot--inactive');
     }
+
+    function onSlideNextBtnClicked() {
+        let newslideIndex = slideIndex + 1;
+        if (newslideIndex >= notificationsBlock__slidesRefs.length){
+            newslideIndex = 0;
+        }
+
+        notificationsBlock__slidesRefs[newslideIndex].classList.remove('notification-block__slide--inactive');
+        notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
+        notificationsBlock__dotsRefs[newslideIndex].classList.remove('notifications-block__dot--inactive');
+        notificationsBlock__dotsRefs[slideIndex].classList.add('notifications-block__dot--inactive');
+        slideIndex = newslideIndex;
+    }
+
+    function onSlidePrevBtnClicked() {
+        let newslideIndex = slideIndex - 1;
+        if (newslideIndex < 0){
+            newslideIndex = notificationsBlock__slidesRefs.length-1;
+        }
+        notificationsBlock__slidesRefs[newslideIndex].classList.remove('notification-block__slide--inactive');
+        notificationsBlock__slidesRefs[slideIndex].classList.add('notification-block__slide--inactive');
+        notificationsBlock__dotsRefs[newslideIndex].classList.remove('notifications-block__dot--inactive');
+        notificationsBlock__dotsRefs[slideIndex].classList.add('notifications-block__dot--inactive');
+        slideIndex = newslideIndex;
+    }
+
+
     resetSlideShow();
 
-    //-----------
 
+    //-----------
     return notificationsBlock;
 };
 //-------------------------------------------------//
